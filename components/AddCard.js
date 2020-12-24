@@ -27,7 +27,7 @@ export default AddCard;
 const styles = StyleSheet.create({
 
     container: {
-        marginBottom: 10,
+        marginBottom: 20,
         flexBasis: 250,
         justifyContent: 'center',
         alignItems: 'center'
