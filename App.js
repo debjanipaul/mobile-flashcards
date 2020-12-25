@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import MainNavigator from './navigation/MainNavigator'
 import DeckList from './components/DeckList';
 import AddDeck from './components/AddDeck';
 import DeckScreen from './components/DeckScreen';
@@ -15,7 +17,10 @@ export default function App() {
       <AddDeck />
       <DeckScreen />
       <AddCard /> */}
-      <Quiz />
+      {/* <Quiz /> */}
+      <NavigationContainer >
+        <MainNavigator />
+      </NavigationContainer>
     </View>
   );
 }
