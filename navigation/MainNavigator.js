@@ -16,7 +16,7 @@ enableScreens();
 const Stack = createStackNavigator();
 
 const StackNavigatorConfig = {
-    headerMode: "screen"
+    headerMode: "float"
 }
 
 const StackConfig = {
@@ -57,8 +57,8 @@ const StackConfig = {
 
 const MainNavigator = () => (
     <Stack.Navigator
-        initialRouteName="Root"  {...StackNavigatorConfig}>
-        <Stack.Screen name="Root" component={TabNavigator} />
+        initialRouteName="Home"  {...StackNavigatorConfig}>
+        <Stack.Screen name="Home" component={TabNavigator} />
         <Stack.Screen {...StackConfig['DeckScreen']} />
         <Stack.Screen {...StackConfig['Quiz']} />
         <Stack.Screen {...StackConfig['AddCard']} />

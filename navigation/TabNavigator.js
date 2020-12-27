@@ -29,6 +29,7 @@ export default function TabNavigator() {
                         <Ionicons
                             color={darkGray}
                             name={isIOS ? 'ios-home' : 'md-home'}
+                            size={20}
                         />,
                 }}
             />
@@ -41,6 +42,7 @@ export default function TabNavigator() {
                         <Ionicons
                             color={darkGray}
                             name={isIOS ? 'ios-add-circle' : 'md-add-circle'}
+                            size={20}
                         />
                 }}
             />

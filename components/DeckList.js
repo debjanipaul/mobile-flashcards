@@ -1,25 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Deck from './Deck'
+import { Text, StyleSheet, ScrollView } from 'react-native';
+import Deck from './Deck';
+import { connect } from 'react-redux';
+import { handleInitialData } from '../actions/index';
+
 
 class DeckList extends React.Component {
+
+    componentDidMount() {
+        this.props.handleInitialData();
+    }
+
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Text style={styles.mainTitle}>Choose Your Deck</Text>
                 <Deck />
                 <Deck />
                 <Deck />
-            </View>
+            </ScrollView>
         )
     }
 }
-export default DeckList;
+//  
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     mainTitle: {
         textAlign: "center",
@@ -29,3 +37,10 @@ const styles = StyleSheet.create({
         marginBottom: 30
     }
 })
+
+const mapStateToProps = state => ({ decks: state });
+
+export default connect(
+    mapStateToProps,
+    { handleInitialData }
+)(DeckList);
