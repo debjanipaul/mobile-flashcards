@@ -1,13 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 class Deck extends React.Component {
+
     render() {
+        const { deck, navigation } = this.props
+        console.log('navigation', navigation)
+        //console.log("deckTitle", deck.title)
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>Deck 1</Text>
-                <Text style={styles.length}>3 Cards</Text>
-            </View>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('DeckScreen', { deckId: deck.title })
+                }}
+            >
+                <View style={styles.container}>
+                    <Text style={styles.title}>{deck.title}</Text>
+                    <Text style={styles.length}>{deck.questions.length} Cards</Text>
+                </View>
+            </TouchableOpacity>
         )
     }
 }

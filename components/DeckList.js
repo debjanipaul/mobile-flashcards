@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text, StyleSheet, ScrollView } from 'react-native';
+import { Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Deck from './Deck';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/index';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class DeckList extends React.Component {
 
@@ -13,22 +12,26 @@ class DeckList extends React.Component {
 
     render() {
         const { decks, navigation } = this.props;
-        console.log(decks)
+        // console.log('decks from decklist', decks)
 
         return (
             <ScrollView style={styles.container}>
                 <Text style={styles.mainTitle}>Choose Your Deck</Text>
-                {Object.values(decks).map(deck => {
+                {Object.keys(decks).map(id => {
                     return (
                         <TouchableOpacity
-                            key={deck.title}
-                            onPress={() => {
-                                navigation.navigate('DeckScreen', { title: deck.title })
-                            }}
+                            key={id}
+                        // onPress={() => {
+                        //     navigation.navigate('DeckScreen', { deckId: decks[id].title })
+                        // }}
                         >
-                            <Deck id={deck.title} />
-                            {/* <Deck />
-                            <Deck /> */}
+                            <Deck
+                                key={id}
+                                deck={decks[id]}
+                                id={id}
+                                navigation={navigation}
+                            />
+
                         </TouchableOpacity>
                     )
                 }
