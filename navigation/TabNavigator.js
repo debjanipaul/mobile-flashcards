@@ -17,7 +17,6 @@ const INITIAL_ROUTE_NAME = 'Decks';
 
 
 export default function TabNavigator() {
-
     return (
         <Tab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
             <Tab.Screen
