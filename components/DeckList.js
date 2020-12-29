@@ -12,26 +12,21 @@ class DeckList extends React.Component {
 
     render() {
         const { decks, navigation } = this.props;
-        // console.log('decks from decklist', decks)
-
+        if (!decks) {
+            return <Text>No decks to show yet.</Text>
+        }
         return (
             <ScrollView style={styles.container}>
                 <Text style={styles.mainTitle}>Choose Your Deck</Text>
-                {Object.keys(decks).map(id => {
+                {Object.values(decks).map(deck => {
                     return (
                         <TouchableOpacity
-                            key={id}
-                        // onPress={() => {
-                        //     navigation.navigate('DeckScreen', { deckId: decks[id].title })
-                        // }}
+                            key={deck.title}
+                            onPress={() => {
+                                navigation.navigate('DeckScreen', { title: deck.title })
+                            }}
                         >
-                            <Deck
-                                key={id}
-                                deck={decks[id]}
-                                id={id}
-                                navigation={navigation}
-                            />
-
+                            <Deck id={deck.title} />
                         </TouchableOpacity>
                     )
                 }
@@ -56,17 +51,12 @@ const styles = StyleSheet.create({
     }
 })
 
-// const mapStateToProps = state => ({ decks: state });
-
-// export default connect(
-//     mapStateToProps,
-//     { handleInitialData }
-// )(DeckList);
-
-function mapStateToProps(decks) {
+function mapStateToProps(state) {
+    const decks = state
     return {
         decks
     }
 }
 
-export default connect(mapStateToProps, { handleInitialData })(DeckList)
+export default connect(mapStateToProps, { handleInitialData })(DeckList);
+

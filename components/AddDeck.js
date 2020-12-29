@@ -1,26 +1,51 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { addDeck } from '../actions/index';
 
 class AddDeck extends React.Component {
+
+    state = {
+        text: ''
+    };
+
+    handleChange = text => {
+        this.setState({ text });
+    };
+
+    handleSubmit = () => {
+        const { addDeck, navigation } = this.props;
+        console.log('hello')
+
+        addDeck(this.state.text);
+        this.setState(() => ({ text: '' }));
+        navigation.navigate('Home')
+    };
+
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>What is the Title of your new deck?</Text>
                 <TextInput style={styles.deckTitle}
                     placeholder="Add Deck Name"
+                    value={this.state.text}
+                    onChangeText={this.handleChange}
                 />
                 <View style={styles.btn}>
-                    <Button
-                        title="Create Deck"
-                        color="white"
-                        fontWeight="bold"
-                    />
+                    <TouchableOpacity>
+                        <Button
+                            title="Create Deck"
+                            color="white"
+                            fontWeight="bold"
+                            disabled={this.state.text === ''}
+                            onPress={this.handleSubmit}
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
         )
     }
 }
-export default AddDeck;
 
 const styles = StyleSheet.create({
     container: {
@@ -66,3 +91,5 @@ const styles = StyleSheet.create({
     }
 
 })
+
+export default connect(null, { addDeck })(AddDeck);

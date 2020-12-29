@@ -8,7 +8,7 @@ export async function getDecks() {
     try {
 
         const results = await AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY);
-        console.log('decks from getDecks', results)
+        //console.log('decks from getDecks', results)
 
         if (results === null) {
             AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks));

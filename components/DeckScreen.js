@@ -1,36 +1,55 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import Deck from './Deck'
+import Deck from './Deck';
+import { connect } from 'react-redux';
+import { removeDeck } from '../actions/index';
 
 class DeckScreen extends React.Component {
+
+    handleDeleteDeck = id => {
+        const { navigation } = this.props
+        this.props.removeDeck(id);
+        navigation.navigate('Home')
+    }
+
+
     render() {
+        const { deck } = this.props
         return (
             <View style={styles.container}>
-                <Deck />
+                <Deck
+                    id={deck.title}
+                />
                 <View style={styles.btn1}>
                     <Button
                         title="Add Card"
                         color='white'
+                        onPress={() =>
+                            this.props.navigation.navigate('AddCard', { title: deck.title })
+                        }
                     />
                 </View>
                 <View style={styles.btn1}>
                     <Button
                         title="Start Quiz"
                         color='white'
+                        disabled={deck.questions.length > 0 ? false : true}
+                        onPress={() =>
+                            this.props.navigation.navigate('Quiz', { title: deck.title })
+                        }
                     />
                 </View>
                 <View style={styles.btn}>
                     <Button
                         title="Delete Deck"
                         color='white'
+                        onPress={() => this.handleDeleteDeck(deck.title)}
                     />
                 </View>
             </View>
         )
     }
 }
-
-export default DeckScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -58,3 +77,12 @@ const styles = StyleSheet.create({
         marginTop: 40,
     }
 })
+
+function mapStateToProps(state, { route }) {
+    const { title } = route.params;
+    const deck = state[title];
+    return {
+        deck
+    }
+}
+export default connect(mapStateToProps, { removeDeck })(DeckScreen);
