@@ -24,6 +24,7 @@ export default function TabNavigator() {
                 component={DeckList}
                 options={{
                     title: 'Decks',
+                    header: null,
                     tabBarIcon: () =>
                         <Ionicons
                             color={darkGray}
@@ -38,6 +39,7 @@ export default function TabNavigator() {
                 component={AddDeck}
                 options={{
                     title: 'AddDeck',
+                    header: null,
                     tabBarIcon: () =>
                         <Ionicons
                             color={darkGray}

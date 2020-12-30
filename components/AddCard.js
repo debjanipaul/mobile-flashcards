@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
-import { darkGray, blue, white, green, lightGreen } from '../utils/colors';
+import { lightGray, blue, pink, red } from '../utils/colors';
 import { addCard } from '../actions/index';
 import { connect } from 'react-redux';
 import { addCardToDeck } from '../utils/api';
@@ -66,9 +66,11 @@ const styles = StyleSheet.create({
     container: {
         // marginBottom: 20,
         // flexBasis: 250,
-        justifyContent: 'center',
+        flex: 1,
+        // justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50,
+        backgroundColor: lightGray,
+        paddingTop: 30
     },
     caption: {
         fontSize: 25,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
         // textAlign: 'left',
         // paddingLeft: 50,
         color: blue,
-        paddingTop: 30,
+        // paddingTop: 30,
         marginBottom: 20
 
     },
@@ -86,6 +88,7 @@ const styles = StyleSheet.create({
         height: 45,
         minWidth: 300,
         borderColor: 'gray',
+        backgroundColor: pink,
         borderWidth: 1,
         paddingLeft: 10,
         paddingRight: 10,
@@ -96,8 +99,8 @@ const styles = StyleSheet.create({
         textAlign: 'left'
     },
     btn: {
-        backgroundColor: 'red',
-        borderColor: 'red',
+        backgroundColor: red,
+        borderColor: red,
         borderWidth: 1,
         borderRadius: 5,
         marginBottom: 20

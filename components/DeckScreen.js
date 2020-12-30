@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { darkGray, blue, lightGray } from '../utils/colors';
+import { View, StyleSheet, Button } from 'react-native';
+import { red, blue, lightGray } from '../utils/colors';
 import Deck from './Deck';
 import { connect } from 'react-redux';
 import { removeDeck } from '../actions/index';
@@ -59,9 +59,11 @@ class DeckScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
+        flex: 1,
+        // justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 20,
+        // marginBottom: 20,
+        backgroundColor: lightGray
     },
     btn1: {
         borderColor: blue,
@@ -75,8 +77,8 @@ const styles = StyleSheet.create({
 
     },
     btn: {
-        backgroundColor: 'red',
-        borderColor: 'red',
+        backgroundColor: red,
+        borderColor: red,
         borderWidth: 1,
         borderRadius: 5,
         marginBottom: 20,

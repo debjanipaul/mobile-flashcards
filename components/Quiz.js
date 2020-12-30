@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-import { darkGray, blue, white, green, lightGreen } from '../utils/colors';
+import { blue, lightGray, red } from '../utils/colors';
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
 class Quiz extends React.Component {
@@ -40,7 +40,7 @@ class Quiz extends React.Component {
     render() {
         const { questions } = this.props.deck
         const { showText, questionCounter, correctAns } = this.state
-        console.log('Quiz', questions.length)
+        // console.log('Quiz', questions.length)
 
         //If empty deck:
         if (questions.length === 0) {
@@ -111,11 +111,13 @@ class Quiz extends React.Component {
 const styles = StyleSheet.create({
 
     container: {
+        flex: 1,
         minWidth: 350,
-        marginBottom: 10,
-        justifyContent: 'center',
+        // marginBottom: 10,
+        // justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 0
+        marginTop: 0,
+        backgroundColor: lightGray
     },
     questCount: {
         fontSize: 20,
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         marginBottom: 50,
         textAlign: 'center',
-        color: 'red',
+        color: red,
         fontWeight: 'bold'
     },
 
@@ -152,8 +154,8 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     btnIncorrect: {
-        backgroundColor: 'red',
-        borderColor: 'red',
+        backgroundColor: red,
+        borderColor: red,
         borderWidth: 1,
         borderRadius: 5,
         marginBottom: 20
@@ -182,7 +184,8 @@ const styles = StyleSheet.create({
     scoreContainer: {
         flex: 1,
         justifyContent: 'center',
-        marginTop: -120
+        marginTop: -120,
+        backgroundColor: lightGray
     },
     scoreCap1: {
         fontSize: 30,
@@ -210,8 +213,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     btnGoBack: {
-        backgroundColor: 'red',
-        borderColor: 'red',
+        backgroundColor: red,
+        borderColor: red,
         borderWidth: 1,
         borderRadius: 5,
         marginBottom: 20,

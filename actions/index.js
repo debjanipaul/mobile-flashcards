@@ -39,7 +39,7 @@ export function handleInitialData() {
     return dispatch => {
         return getDecks().then(decks => {
             dispatch(receiveDecks(decks));
-            console.log('decks from index', decks)
+            // console.log('decks from index', decks)
         });
     };
 }

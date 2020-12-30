@@ -1,8 +1,9 @@
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Notifications } from 'expo';
+//import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions'
-//import * as Notifications from 'expo-notifications'
+import * as Notifications from 'expo-notifications'
+
 
 const NOTIFICATION_KEY = 'Flashcards: notifications'
 
@@ -43,9 +44,9 @@ export function setLocalNotification() {
 
                             Notifications.scheduleLocalNotificationAsync(
                                 createNotification(), {
-                                time: tomorrow,
-                                repeat: 'day',
-                            }
+                                    time: tomorrow,
+                                    repeat: 'day',
+                                }
                             )
 
                             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))

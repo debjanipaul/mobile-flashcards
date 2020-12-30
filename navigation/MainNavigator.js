@@ -1,16 +1,14 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
-import DeckList from '../components/DeckList';
-import AddDeck from '../components/AddDeck';
 import DeckScreen from '../components/DeckScreen';
 import AddCard from '../components/AddCard';
 import Quiz from '../components/Quiz';
 import TabNavigator from './TabNavigator';
-import { Screen, screensEnabled } from 'react-native-screens';
 import { enableScreens } from 'react-native-screens';
+import { blue, white } from '../utils/colors';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
-import { darkGray, blue, white, green, lightGreen } from '../utils/colors';
 const isIOS = Platform.OS === 'ios' ? true : false;
 enableScreens();
 const Stack = createStackNavigator();
@@ -53,26 +51,37 @@ const StackConfig = {
             },
         },
     },
-    // Home: {
-    //     name: "Home",
-    //     component: { TabNavigator },
-    //     options: {
-    //         title: 'Add Card',
-    //         headerTintColor: 'white',
-    //         headerStyle: {
-    //             backgroundColor: blue
-    //         },
-    //         navigationOptions: {
-    //             header: null,
-    //         },
-    //     },
-    // },
+}
+function getHeaderTitle(route) {
+    const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home'
+    switch (routeName) {
+        case 'Home':
+            return 'Home'
+        case 'AddDeck':
+            return 'Add Deck'
+    }
 }
 
 const MainNavigator = () => (
     <Stack.Navigator
-        initialRouteName="Home" {...StackNavigatorConfig}>
-        <Stack.Screen name="Home" component={TabNavigator} />
+        initialRouteName="Home"
+        screenOptions={{
+            gestureEnabled: true,
+            headerStyle: {
+                backgroundColor: blue
+            },
+            headerTitleStyle: {
+                fontWeight: 'bold'
+            },
+            headerTintColor: white
+        }}
+        {...StackNavigatorConfig}>
+        <Stack.Screen name="Home"
+            component={TabNavigator}
+            options={({ route }) => ({
+                headerTitle: getHeaderTitle(route)
+            })}
+        />
         <Stack.Screen {...StackConfig['DeckScreen']} />
         <Stack.Screen {...StackConfig['Quiz']} />
         <Stack.Screen {...StackConfig['AddCard']} />

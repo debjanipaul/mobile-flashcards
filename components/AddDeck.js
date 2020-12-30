@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
-import { lightGray, blue, white, pink, red } from '../utils/colors';
+import { lightGray, blue, pink, red } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions/index';
 import { saveDeckTitle } from '../utils/api'
@@ -53,11 +53,10 @@ class AddDeck extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: pink,
+        backgroundColor: lightGray,
         minWidth: 350,
-        marginBottom: 20,
     },
     title: {
         textAlign: "center",
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
         height: 40,
         minWidth: 300,
         borderColor: blue,
-        backgroundColor: lightGray,
+        backgroundColor: pink,
         borderWidth: 1,
         paddingLeft: 10,
         paddingRight: 10,

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, StyleSheet, ScrollView, TouchableOpacity, Animated, Easing } from 'react-native';
-import { darkGray, blue, lightGray, pink, red } from '../utils/colors';
-import Deck from './Deck';
+import { Text, StyleSheet, View, ScrollView, TouchableOpacity, Animated, Easing } from 'react-native';
+import { lightGray, gray, blue, pink, red } from '../utils/colors';
+// import Deck from './Deck';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/index';
 
@@ -13,7 +13,7 @@ class DeckList extends React.Component {
     startFade = () => {
         Animated.timing(this.state.fadeValue, {
             toValue: 1,
-            duration: 1000,
+            duration: 300,
             useNativeDriver: true,
             easing: Easing.bezier(0, 1.19, 0.74, 1.2),
         }).start();
@@ -24,8 +24,8 @@ class DeckList extends React.Component {
     }
 
     // handlePress = () => {
-    //     const { navigation, deck } = this.props
-    //     // this.startFade()
+    //     const { deck, navigation } = this.props
+    //     this.startFade()
     //     navigation.navigate('DeckScreen', { title: deck.title })
     // }
 
@@ -37,25 +37,33 @@ class DeckList extends React.Component {
         }
         return (
             <ScrollView style={styles.container}>
-                <Text style={styles.mainTitle}>Choose Your Deck</Text>
+                <Text style={styles.mainTitle}>Choose Deck</Text>
                 {Object.values(decks).map(deck => {
                     return (
                         <TouchableOpacity
                             key={deck.title}
-                            // onPress={this.handlePress}
                             onPress={() => {
-                                console.log("b4 start fade")
                                 this.startFade()
-                                console.log("start fade")
-                                console.log("DeckTitle", deck.title)
-
                                 navigation.navigate('DeckScreen', { title: deck.title })
-                                console.log("bye")
                             }}
                         >
-                            {/* <Deck id={deck.title} /> */}
-                            <Animated.View>
-                                <Deck id={deck.title} />
+                            <Animated.View
+                                style={{
+                                    transform: [
+                                        {
+                                            scale: this.state.fadeValue.interpolate({
+                                                inputRange: [0, 0.5, 1],
+                                                outputRange: [1, 0.5, 1]
+                                            })
+                                        }
+                                    ],
+                                }}
+                            >
+                                {/* <Deck id={deck.title} /> */}
+                                <View style={styles.deckContainer}>
+                                    <Text style={styles.title}>{deck.title}</Text>
+                                    <Text style={styles.length}>{deck.questions.length} Cards</Text>
+                                </View>
                             </Animated.View>
                         </TouchableOpacity>
                     )
@@ -72,7 +80,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 15,
         paddingRight: 15,
-        backgroundColor: pink
+        backgroundColor: lightGray
     },
     mainTitle: {
         textAlign: "center",
@@ -81,6 +89,31 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 30,
         marginBottom: 30
+    },
+    deckContainer: {
+        borderWidth: 1,
+        minHeight: 100,
+        minWidth: 300,
+        backgroundColor: pink,
+        borderColor: gray,
+        borderRadius: 5,
+        marginBottom: 10,
+        marginTop: 20,
+        flexBasis: 120,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    title: {
+        textAlign: "center",
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: red
+    },
+    length: {
+        textAlign: "center",
+        fontSize: 18,
+        color: blue,
+        fontWeight: '700'
     }
 })
 

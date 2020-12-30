@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { darkGray, blue, lightGray, red, gray, white } from '../utils/colors';
+import { pink, red, gray, blue } from '../utils/colors';
 import { connect } from 'react-redux';
 import { NavigationEvents } from 'react-navigation';
 class Deck extends React.Component {
@@ -11,10 +11,10 @@ class Deck extends React.Component {
         // console.log("from deck", deck.questions.length)
         return (
             <View style={styles.container}>
-                <TouchableOpacity >
+                <View >
                     <Text style={styles.title}>{deck.title}</Text>
                     <Text style={styles.length}>{deck.questions.length} Cards</Text>
-                </TouchableOpacity>
+                </View>
             </View>
         )
     }
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
         minHeight: 100,
-        minWidth: 300,
-        backgroundColor: lightGray,
+        minWidth: 350,
+        backgroundColor: pink,
         borderColor: gray,
         borderRadius: 5,
         marginBottom: 10,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     length: {
         textAlign: "center",
         fontSize: 18,
-        color: white,
+        color: blue,
         fontWeight: '700'
     }
 })
