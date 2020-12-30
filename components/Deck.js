@@ -1,16 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { darkGray, blue, lightGray, red, gray, white } from '../utils/colors';
 import { connect } from 'react-redux';
+import { NavigationEvents } from 'react-navigation';
 class Deck extends React.Component {
 
     render() {
         const { deck, navigation } = this.props
-        console.log("from deck", deck.title)
-        console.log("from deck", deck.questions.length)
+        // console.log("from deck", deck.title)
+        // console.log("from deck", deck.questions.length)
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>{deck.title}</Text>
-                <Text style={styles.length}>{deck.questions.length} Cards</Text>
+                <TouchableOpacity >
+                    <Text style={styles.title}>{deck.title}</Text>
+                    <Text style={styles.length}>{deck.questions.length} Cards</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -18,25 +22,29 @@ class Deck extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 1,
         borderWidth: 1,
-        minHeight: 120,
-        minWidth: 350,
-        borderColor: 'gray',
+        minHeight: 100,
+        minWidth: 300,
+        backgroundColor: lightGray,
+        borderColor: gray,
+        borderRadius: 5,
         marginBottom: 10,
+        marginTop: 20,
         flexBasis: 120,
         justifyContent: 'center',
         alignItems: 'center'
     },
     title: {
         textAlign: "center",
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
-        color: 'red'
+        color: red
     },
     length: {
         textAlign: "center",
-        fontSize: 18
+        fontSize: 18,
+        color: white,
+        fontWeight: '700'
     }
 })
 

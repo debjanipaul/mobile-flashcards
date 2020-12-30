@@ -1,16 +1,36 @@
 import React from 'react';
-import { Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, ScrollView, TouchableOpacity, Animated, Easing } from 'react-native';
+import { darkGray, blue, lightGray, pink, red } from '../utils/colors';
 import Deck from './Deck';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/index';
 
 class DeckList extends React.Component {
+    state = {
+        fadeValue: new Animated.Value(0)
+    };
+
+    startFade = () => {
+        Animated.timing(this.state.fadeValue, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+            easing: Easing.bezier(0, 1.19, 0.74, 1.2),
+        }).start();
+    };
 
     componentDidMount() {
         this.props.handleInitialData();
     }
 
+    // handlePress = () => {
+    //     const { navigation, deck } = this.props
+    //     // this.startFade()
+    //     navigation.navigate('DeckScreen', { title: deck.title })
+    // }
+
     render() {
+
         const { decks, navigation } = this.props;
         if (!decks) {
             return <Text>No decks to show yet.</Text>
@@ -22,11 +42,21 @@ class DeckList extends React.Component {
                     return (
                         <TouchableOpacity
                             key={deck.title}
+                            // onPress={this.handlePress}
                             onPress={() => {
+                                console.log("b4 start fade")
+                                this.startFade()
+                                console.log("start fade")
+                                console.log("DeckTitle", deck.title)
+
                                 navigation.navigate('DeckScreen', { title: deck.title })
+                                console.log("bye")
                             }}
                         >
-                            <Deck id={deck.title} />
+                            {/* <Deck id={deck.title} /> */}
+                            <Animated.View>
+                                <Deck id={deck.title} />
+                            </Animated.View>
                         </TouchableOpacity>
                     )
                 }
@@ -40,13 +70,16 @@ class DeckList extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'center'
+        paddingLeft: 15,
+        paddingRight: 15,
+        backgroundColor: pink
     },
     mainTitle: {
         textAlign: "center",
-        fontSize: 20,
-        color: 'blue',
+        fontSize: 30,
+        color: blue,
         fontWeight: 'bold',
+        marginTop: 30,
         marginBottom: 30
     }
 })

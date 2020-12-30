@@ -18,7 +18,7 @@ function decks(state = {}, action) {
                 ...state,
                 [action.title]: {
                     title: action.title,
-                    question: []
+                    questions: []
                 }
             }
         case ADD_CARD:
@@ -26,7 +26,7 @@ function decks(state = {}, action) {
                 ...state,
                 [action.deckId]: {
                     ...state[action.deckId],
-                    questions: [...state[action.deckId].questions].concat(action.card)
+                    questions: state[action.deckId].questions.concat(action.card)
                 }
             };
         case REMOVE_DECK:

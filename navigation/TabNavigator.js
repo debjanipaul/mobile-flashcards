@@ -3,9 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import DeckList from '../components/DeckList';
 import AddDeck from '../components/AddDeck';
-import { darkGray, blue } from '../utils/colors';
+import { darkGray } from '../utils/colors';
 import { Platform } from 'react-native';
-import { Screen, screensEnabled } from 'react-native-screens';
 import { enableScreens } from 'react-native-screens';
 
 
@@ -17,6 +16,7 @@ const INITIAL_ROUTE_NAME = 'Decks';
 
 
 export default function TabNavigator() {
+
     return (
         <Tab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
             <Tab.Screen
@@ -28,9 +28,10 @@ export default function TabNavigator() {
                         <Ionicons
                             color={darkGray}
                             name={isIOS ? 'ios-home' : 'md-home'}
-                            size={20}
+                            size={25}
                         />,
                 }}
+
             />
             <Tab.Screen
                 name="AddDeck"
@@ -41,7 +42,7 @@ export default function TabNavigator() {
                         <Ionicons
                             color={darkGray}
                             name={isIOS ? 'ios-add-circle' : 'md-add-circle'}
-                            size={20}
+                            size={25}
                         />
                 }}
             />

@@ -52,11 +52,11 @@ export async function saveDeckTitle(title) {
 export async function addCardToDeck(title, card) {
     try {
         const results = JSON.parse(await AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))
-        //Target the right deck
+            //Target the right deck
         const deck = results[title]
 
         //Merge the card to deck
-        asyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
+        await AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
             [title]: {
                 questions: [...deck.questions].concat(card)
             }
@@ -68,7 +68,7 @@ export async function addCardToDeck(title, card) {
 }
 
 //Delete deck
-export async function removeDeck(id) {
+export async function removeDeckAsync(id) {
     try {
         const results = JSON.parse(await AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))
         delete results[id]

@@ -16,7 +16,7 @@ enableScreens();
 const Stack = createStackNavigator();
 
 const StackNavigatorConfig = {
-    headerMode: "float"
+    headerMode: "screen"
 }
 
 const StackConfig = {
@@ -25,7 +25,7 @@ const StackConfig = {
         component: DeckScreen,
         options: {
             title: 'DeckScreen',
-            headerTintColor: 'red',
+            headerTintColor: 'white',
             headerStyle: {
                 backgroundColor: blue
             },
@@ -36,7 +36,7 @@ const StackConfig = {
         component: Quiz,
         options: {
             title: 'Quiz',
-            headerTintColor: 'red',
+            headerTintColor: 'white',
             headerStyle: {
                 backgroundColor: blue
             },
@@ -47,17 +47,31 @@ const StackConfig = {
         component: AddCard,
         options: {
             title: 'Add Card',
-            headerTintColor: 'red',
+            headerTintColor: 'white',
             headerStyle: {
                 backgroundColor: blue
             },
         },
     },
+    // Home: {
+    //     name: "Home",
+    //     component: { TabNavigator },
+    //     options: {
+    //         title: 'Add Card',
+    //         headerTintColor: 'white',
+    //         headerStyle: {
+    //             backgroundColor: blue
+    //         },
+    //         navigationOptions: {
+    //             header: null,
+    //         },
+    //     },
+    // },
 }
 
 const MainNavigator = () => (
     <Stack.Navigator
-        initialRouteName="Home"  {...StackNavigatorConfig}>
+        initialRouteName="Home" {...StackNavigatorConfig}>
         <Stack.Screen name="Home" component={TabNavigator} />
         <Stack.Screen {...StackConfig['DeckScreen']} />
         <Stack.Screen {...StackConfig['Quiz']} />

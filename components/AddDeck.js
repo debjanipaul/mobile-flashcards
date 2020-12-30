@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
+import { lightGray, blue, white, pink, red } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions/index';
+import { saveDeckTitle } from '../utils/api'
 
 class AddDeck extends React.Component {
 
@@ -9,7 +11,7 @@ class AddDeck extends React.Component {
         text: ''
     };
 
-    handleChange = text => {
+    handleChange = (text) => {
         this.setState({ text });
     };
 
@@ -18,8 +20,9 @@ class AddDeck extends React.Component {
         console.log('hello')
 
         addDeck(this.state.text);
+        saveDeckTitle(this.state.text)
         this.setState(() => ({ text: '' }));
-        navigation.navigate('Home')
+        navigation.goBack();
     };
 
     render() {
@@ -49,19 +52,17 @@ class AddDeck extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        // borderRadius: 1,
-        // borderWidth: 1,
-        // minHeight: 120,
+        backgroundColor: pink,
         minWidth: 350,
-        // borderColor: 'red',
         marginBottom: 20,
     },
     title: {
         textAlign: "center",
         fontSize: 30,
-        color: 'blue',
+        color: blue,
         fontWeight: 'bold',
         paddingTop: 50,
         paddingLeft: 15,
@@ -71,7 +72,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 40,
         minWidth: 300,
-        borderColor: "gray",
+        borderColor: blue,
+        backgroundColor: lightGray,
         borderWidth: 1,
         paddingLeft: 10,
         paddingRight: 10,
@@ -83,8 +85,8 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     btn: {
-        backgroundColor: 'red',
-        borderColor: 'red',
+        backgroundColor: red,
+        borderColor: red,
         borderWidth: 1,
         borderRadius: 5,
         marginBottom: 20

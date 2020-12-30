@@ -6,39 +6,40 @@ import MainNavigator from './navigation/MainNavigator';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers/index';
-import thunk from 'redux-thunk'
-// import DeckList from './components/DeckList';
-// import AddDeck from './components/AddDeck';
-// import DeckScreen from './components/DeckScreen';
-// import AddCard from './components/AddCard';
-// import Quiz from './components/Quiz'
+import thunk from 'redux-thunk';
+import { blue } from './utils/colors';
+import { setLocalNotification } from './utils/helpers';
+import Constants from 'expo-constants';
 
-
-export default function App() {
+function AppStatusBar({ backgroundColor, ...props }) {
   return (
-    <Provider store={createStore(reducer, applyMiddleware(thunk))}>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        {/* <DeckList />
-      <AddDeck />
-      <DeckScreen />
-      <AddCard /> */}
-        {/* <Quiz /> */}
-        <NavigationContainer >
-          <MainNavigator />
-        </NavigationContainer>
-      </View>
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
+export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+  render() {
+    return (
+      <Provider store={createStore(reducer, applyMiddleware(thunk))}>
+        <View style={styles.container}>
+          <AppStatusBar backgroundColor={blue} barStyle="dark-content" />
+          <NavigationContainer >
+            <MainNavigator />
+          </NavigationContainer>
+        </View>
 
-    </Provider>
-
-  );
+      </Provider>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
     justifyContent: 'center',
   },
 });
