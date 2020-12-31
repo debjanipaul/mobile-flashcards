@@ -53,6 +53,7 @@ class AddCard extends React.Component {
                         title="Submit"
                         color="white"
                         fontWeight="bold"
+                        disabled={this.state.question === '' || this.state.answer === ''}
                         onPress={this.handleSubmit}
                     />
                 </View>
